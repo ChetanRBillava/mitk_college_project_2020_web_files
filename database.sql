@@ -1,19 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 05, 2021 at 03:34 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Host: 127.0.0.1
+-- Generation Time: Jun 25, 2021 at 08:42 AM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-drop Database college;
-create database college;
-use college;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -38,28 +34,10 @@ CREATE TABLE `admin_login` (
 
 --
 -- Dumping data for table `admin_login`
--- 
+--
 
 INSERT INTO `admin_login` (`email`, `passwd`) VALUES
 ('admin@gmail.com', 'admin');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `shopLogin`
---
-
-CREATE TABLE `shopLogin` (
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `shopLogin`
---
-
-INSERT INTO `shopLogin` (`email`, `password`) VALUES
-('shop@mitk.com', 'shop@mitk');
 
 -- --------------------------------------------------------
 
@@ -100,7 +78,21 @@ CREATE TABLE `attendence` (
   `leave_status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(20) NOT NULL,
+  `item_id` int(2) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `quantity` varchar(20) NOT NULL,
+  `created_at` varchar(50) NOT NULL,
+  `updated_at` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -109,6 +101,7 @@ CREATE TABLE `attendence` (
 --
 
 CREATE TABLE `hostel` (
+  `id` int(10) NOT NULL,
   `student_name` varchar(30) NOT NULL,
   `gender` varchar(50) NOT NULL,
   `sem` varchar(50) NOT NULL,
@@ -121,12 +114,13 @@ CREATE TABLE `hostel` (
   `guardian_email` varchar(50) NOT NULL,
   `student_type` varchar(20) NOT NULL,
   `status` int(11) NOT NULL,
-  `join_date` varchar(50),
-  `room_id` int(20) ,
-  `room_num` varchar(20),
-  `room_rent` int(20) NOT NULL
+  `join_date` varchar(50) DEFAULT NULL,
+  `room_id` int(20) DEFAULT NULL,
+  `room_num` varchar(20) DEFAULT NULL,
+  `room_rent` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `login`
@@ -172,10 +166,11 @@ CREATE TABLE `payment` (
   `trans_date` varchar(50) NOT NULL,
   `total_amt` varchar(50) NOT NULL,
   `trans_status` varchar(50) NOT NULL,
-  `otp` varchar(7) NULL,
-  `verified` varchar(10) NULL
+  `otp` varchar(7) DEFAULT NULL,
+  `verified` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `register`
@@ -199,6 +194,51 @@ CREATE TABLE `register` (
   `status` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rooms`
+--
+
+CREATE TABLE `rooms` (
+  `room_id` int(20) NOT NULL,
+  `room_num` varchar(20) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `forGender` varchar(100) NOT NULL,
+  `rent` int(20) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `max_capacity` varchar(20) NOT NULL,
+  `current_count` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `rooms`
+--
+
+INSERT INTO `rooms` (`room_id`, `room_num`, `type`, `forGender`, `rent`, `status`, `max_capacity`, `current_count`) VALUES
+(1, '201', 'Attached Bathroom', 'Male', 150, 'Not Available', '3', '0'),
+(2, '202', 'Common Bathroom', 'Male', 100, 'Not Available', '3', '0'),
+(3, '203', 'Common Bathroom', 'Female', 100, 'Available', '3', '0'),
+(4, '204', 'Attached Bathroom', 'Female', 150, 'Available', '2', '0'),
+(5, '205', 'Attached Bathroom', 'Female', 150, 'Available', '4', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shoplogin`
+--
+
+CREATE TABLE `shoplogin` (
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `shoplogin`
+--
+
+INSERT INTO `shoplogin` (`email`, `password`) VALUES
+('shop@mitk.com', 'shop@mitk');
 
 -- --------------------------------------------------------
 
@@ -220,46 +260,8 @@ CREATE TABLE `stationary` (
 INSERT INTO `stationary` (`item_id`, `item_name`, `item_amount`, `quantity`) VALUES
 (2, 'Record Book', '90', 50),
 (3, 'Assignment Book', '30', 50),
-(4, 'Blue Book', '30', 50);
-
---
--- Table structure for table `cart`
---
-
-CREATE TABLE `cart` (
-  `cart_id` int(20) NOT NULL,
-  `item_id` int(2) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `quantity` varchar(20) NOT NULL,
-  `created_at` varchar(50) NOT NULL,
-  `updated_at` varchar(50) NOT NULL
-);
-
---
--- Table structure for table `rooms`
---
-
-CREATE TABLE `rooms` (
-  `room_id` int(20) NOT NULL,
-  `room_num` varchar(20) NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `forGender` varchar(100) NOT NULL,
-  `rent` int(20) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `max_capacity` varchar(20) NOT NULL,
-  `current_count` varchar(50) NOT NULL
-);
---
--- Dumping data for table `rooms`
---
-
-INSERT INTO `rooms` (`room_id`, `room_num`, `type`, `for`, `rent`, `status`, `max_capacity`, `current_count`) VALUES
-(1, '201', 'Attached Bathroom', 'Male', 150, 'Available', '3', '0'),
-(2, '202', 'Common Bathroom', 'Male', 100, 'Available', '3', '0'),
-(3, '203', 'Common Bathroom', 'Female', 100, 'Available', '3', '0'),
-(4, '204', 'Attached Bathroom', 'Female', 150, 'Available', '2', '0');
-
+(4, 'Blue Book', '30', 50),
+(5, 'magazine', '200', 50);
 
 --
 -- Indexes for dumped tables
@@ -278,10 +280,19 @@ ALTER TABLE `attendence`
   ADD KEY `email` (`email`);
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`),
+  ADD KEY `item_id` (`item_id`);
+
+--
 -- Indexes for table `hostel`
 --
 ALTER TABLE `hostel`
-  ADD KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `email` (`email`),
+  ADD KEY `room_id` (`room_id`);
 
 --
 -- Indexes for table `login`
@@ -311,24 +322,17 @@ ALTER TABLE `register`
   ADD UNIQUE KEY `guardian_email` (`guardian_email`);
 
 --
+-- Indexes for table `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`room_id`);
+
+--
 -- Indexes for table `stationary`
 --
 ALTER TABLE `stationary`
   ADD PRIMARY KEY (`item_id`);
 
---
--- Indexes for table `cart`
---
-
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cart_id`),
-  ADD KEY `item_id` (`item_id`);
-
---
--- Indexes for table `rooms`
---
-ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`room_id`);
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -340,6 +344,18 @@ ALTER TABLE `admission`
   MODIFY `admission_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `hostel`
+--
+ALTER TABLE `hostel`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `messbill_pay`
 --
 ALTER TABLE `messbill_pay`
@@ -349,41 +365,42 @@ ALTER TABLE `messbill_pay`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `stationary`
---
-ALTER TABLE `stationary`
-  MODIFY `item_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `cart`
---
-ALTER TABLE `cart`
-  MODIFY `cart_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `room_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `stationary`
+--
+ALTER TABLE `stationary`
+  MODIFY `item_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
 
 --
 -- Constraints for table `attendence`
 --
-
 ALTER TABLE `attendence`
   ADD CONSTRAINT `attendence_ibfk_1` FOREIGN KEY (`email`) REFERENCES `register` (`email`);
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `stationary` (`item_id`);
 
 --
 -- Constraints for table `hostel`
 --
 ALTER TABLE `hostel`
-  ADD CONSTRAINT `hostel_ibfk_1` FOREIGN KEY (`email`) REFERENCES `register` (`email`);
-
-ALTER TABLE `hostel`
-  ADD CONSTRAINT FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`);
+  ADD CONSTRAINT `hostel_ibfk_1` FOREIGN KEY (`email`) REFERENCES `register` (`email`),
+  ADD CONSTRAINT `hostel_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`);
 
 --
 -- Constraints for table `login`
@@ -396,14 +413,6 @@ ALTER TABLE `login`
 --
 ALTER TABLE `payment`
   ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`email`) REFERENCES `register` (`email`);
-COMMIT;
-
---
--- Constraints for table `cart`
---
-
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `stationary` (`item_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
