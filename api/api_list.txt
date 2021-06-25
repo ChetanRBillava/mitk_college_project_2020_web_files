@@ -1,0 +1,172 @@
+1]Login Details:
+http://localhost/college_admin_dashboard/api/login.php?email=sadhviah@gmail.com&pswd=sadhvi
+
+2]For Register:
+http://localhost/college_admin_dashboard/api/register.php?name=sadhvi&email=sadhviah@gmail.com&phone=9880754886&address=nearrsmutt thekkatte po and vil&branch=cse&guardian_name=ramakrishna adiga&guardian_phone=9481749596&guardian_email=ramakrishnadigah@gmail.com&sslc_percent=87%&puc_percent=77%&student_status=non hostel&student_type=localite
+
+3]For displaying items:
+http://localhost/college_admin_dashboard/api/disp_stationary.php/
+
+4]For requesting leave for hostel warden:
+http://localhost/college_admin_dashboard/api/request_leave.php/?email=sadhviah@gmail.com&leave_type=sick&leave_from=02/01/2021&leave_till=03/01/2021&return_date=04/01/2021&reason=because of viral fever 
+
+5]For vewing leave request:
+http://localhost/college_admin_dashboard/api/view_request.php
+
+6]For all types of payment:
+http://localhost/college_admin_dashboard/api/all_payment.php?email=sadhviah@gmail.com&payment_for=admission_fee&trans_detail=for year 2020 to 2021&trans_type=online&total_amt=60000
+
+7]For displaying admission fee:
+http://localhost/college_admin_dashboard/api/admission_pay_display.php/
+Result:
+[
+    {
+        "admission_id": "1",
+        "for_year": "first year",
+        "amount": "60000"
+    },
+    {
+        "admission_id": "2",
+        "for_year": "second year",
+        "amount": "50000"
+    },
+    {
+        "admission_id": "3",
+        "for_year": "third year",
+        "amount": "50000"
+    },
+    {
+        "admission_id": "4",
+        "for_year": "fourth year",
+        "amount": "50000"
+    }
+]
+
+8]For displaying mess bill:
+http://localhost/college_admin_dashboard/api/disp_messbill.php/
+Result:
+[
+    {
+        "m_id": "1",
+        "m_details": "1 day",
+        "amount": "100"
+    }
+]
+
+9]For displaying single student: [use post method]
+send $email=$_POST['email'];
+http://localhost/college_admin_dashboard/api/view_student.php/
+Result:
+[
+    {
+        "name": "sadhvi",
+        "email": "sadhviah@gmail.com",
+        "phone": "8310593475",
+        "address": "nearrsmutt thekkatte po and vil",
+        "branch": "cse",
+        "guardian_name": "ramakrishna ",
+        "guardian_phone": "9481749596",
+        "guardian_email": "sadhviah25@gmail.com",
+        "sslc_percent": "87%",
+        "puc_percent": "77%",
+        "student_status": "non hostel"
+    }
+]
+
+
+10]For displaying staionary pay details: [POST METHOD]
+send $email=$_POST['email'];
+http://localhost/college_admin_dashboard/api/view_paysingle.php/
+Result:
+[
+    {
+        "pid": "1",
+        "orderid": "MITK20210103238",
+        "email": "sadhviah@gmail.com",
+        "payment_for": "stationary",
+        "trans_detail": "2,3,4",
+        "trans_type": "online",
+        "trans_date": "01/03/2021 02:07:31 pm",
+        "total_amt": "500",
+        "trans_status": "success"
+    }
+]
+
+
+11]For displaying single student messbill [POSTMETHOD]
+send $email=$_POST['email'];
+http://localhost/college_admin_dashboard/api/view_payhostel_single.php/
+Result:
+[
+    {
+        "pid": "2",
+        "orderid": "MITK20210103441",
+        "email": "sadhviah@gmail.com",
+        "payment_for": "mess_bill",
+        "trans_detail": "30 days mess bill",
+        "trans_type": "online",
+        "trans_date": "01/03/2021 02:08:14 pm",
+        "total_amt": "5000",
+        "trans_status": "success"
+    }
+]
+
+
+12]For displaying single student hostel rent [POSTMETHOD]
+send $email=$_POST['email'];
+http://localhost/college_admin_dashboard/api/view_payrent.php/
+Result:
+[
+    {
+        "pid": "4",
+        "orderid": "MITK2021010374",
+        "email": "sadhviah@gmail.com",
+        "payment_for": "hostel_rent",
+        "trans_detail": "30_days_hostel_rent",
+        "trans_type": "online",
+        "trans_date": "01/03/2021 02:09:41 pm",
+        "total_amt": "2000",
+        "trans_status": "success"
+    }
+]
+
+
+12]For displaying single student admission fee [POSTMETHOD]
+send $email=$_POST['email'];
+http://localhost/college_admin_dashboard/api/view_admissionsingle.php/
+Result:
+[
+    {
+        "pid": "5",
+        "orderid": "MITK20210103135",
+        "email": "sadhviah@gmail.com",
+        "payment_for": "admission_fee",
+        "trans_detail": "for year 2020 to 2021",
+        "trans_type": "online",
+        "trans_date": "01/03/2021 02:10:35 pm",
+        "total_amt": "60000",
+        "trans_status": "success"
+    },
+    {
+        "pid": "16",
+        "orderid": "MITK2021010593",
+        "email": "sadhviah@gmail.com",
+        "payment_for": "admission_fee",
+        "trans_detail": "for year 2020 to 2022",
+        "trans_type": "online",
+        "trans_date": "01/05/2021 01:14:03 pm",
+        "total_amt": "60000",
+        "trans_status": "success"
+    },
+    {
+        "pid": "17",
+        "orderid": "MITK20210105187",
+        "email": "sadhviah@gmail.com",
+        "payment_for": "admission_fee",
+        "trans_detail": "for year 2020 to 2022",
+        "trans_type": "online",
+        "trans_date": "01/05/2021 01:27:49 pm",
+        "total_amt": "60000",
+        "trans_status": "success"
+    }
+]
